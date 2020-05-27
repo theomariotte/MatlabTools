@@ -1,0 +1,74 @@
+function [] = fig2latex(figname,outFmt)
+% figure formating for LaTeX from .fig file
+% formated figure will be saved in the same directory
+% Inputs :
+%   - figname : path to the figure (including name and extension)
+%   - outFmt : extension of the generated picture
+% Available out format :
+% 'fig', 'eps','png','pdf'
+%
+% WARNING : for the moment, this function does not take multiple axes plots
+% into account (e.g. figures generated using subplot)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+if nargin < 2, outFmt = []; end
+if isempty(outFmt)
+    outFmt = 'eps';
+    warning('Default output format used : %s',outFmt);
+end
+
+[figpath, fname, ext] = fileparts(figname);
+if strcmp(ext,'.fig')==0, error('Input file should be ''.fig'' format'); end
+
+% open figure
+hfig = openfig(figname);
+
+% get axes of the figure
+ax = hfig.Children;
+
+% get lines on each axes
+hls = get(ax,'Children');
+
+fprintf('Change figure format (font size, dimensions,...)\n');
+
+% edit changes you want to make...
+% delete(ax(2))
+% ax = ax(1);
+% 
+% hdummy = figure;
+% plot(1,1);
+% posAx = hdummy.Children.Position;
+% delete(hdummy);
+% 
+% set(ax,'Position',posAx);
+
+% General settings (do not edit)
+set(ax,'fontsize',14);
+set(ax,'TickLabelInterpreter','latex');
+set(ax,'xTickLabelMode','auto');
+set(ax,'ylim',[-100 0]);
+xlabel('Fréquence [Hz]');
+ylabel('Amplitude [dB]')
+
+% change line width
+set(hls,'linewidth',2);
+set(hls,'color','k');
+delete(hls(1))
+
+switch outFmt
+    case 'eps'
+        fmt = '-depsc';
+    case 'png'
+        fmt = '-dpng';
+    case 'jpg'
+        fmt = '-djpeg';
+    case 'pdf'
+        fmt = '-dpdf';
+    otherwise 
+        error('No file format found. Try : ''eps'', ''png'',''jpg'',''pdf''');
+end
+
+
+print([figpath fname],fmt);
+fprintf('New figure saved as :\n %s\n',[figpath fname '.' outFmt]);
+end
