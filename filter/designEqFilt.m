@@ -2,4 +2,9 @@
 
 function filterBank = designEqFilt(filtParam)
 
+
+
+
+
+
 end
