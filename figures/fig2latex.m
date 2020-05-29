@@ -52,8 +52,7 @@ ylabel('Amplitude [dB]')
 % Line width
 set(hls,'linewidth',2);
 % line color
-set(hls,'color','r');
-delete(hls(1))
+% set(hls,'color','k');
 
 %%% Output formating ('eps' recommanded for LaTeX use)
 switch outFmt
@@ -73,6 +72,5 @@ end
 print([figpath fname],fmt);
 fprintf('New figure saved as :\n %s\n',[figpath fname '.' outFmt]);
 
-%test
 
 end
