@@ -73,4 +73,6 @@ end
 print([figpath fname],fmt);
 fprintf('New figure saved as :\n %s\n',[figpath fname '.' outFmt]);
 
+%test
+
 end
