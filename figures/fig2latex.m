@@ -52,7 +52,7 @@ ylabel('Amplitude [dB]')
 % Line width
 set(hls,'linewidth',2);
 % line color
-set(hls,'color','k');
+set(hls,'color','r');
 delete(hls(1))
 
 %%% Output formating ('eps' recommanded for LaTeX use)
