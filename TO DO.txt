@@ -1,2 +1,4 @@
 Liste des choses à faire :
--
+
+MatlabTools/filter : 
+-création d'une fonction de design de filtre passe bande pour décomposer un signal en bandes d'octaves. Cette fonction ne fait que créer le banc de filtres. Une autre fonction permettra de décomposer un signal x en bandes de 1/N d'octave. 
