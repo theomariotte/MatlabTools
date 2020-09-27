@@ -30,30 +30,55 @@ hfig = openfig(figname);
 % get axes of the figure
 ax = hfig.Children;
 
-% get lines on each axes
-hls = get(ax,'Children');
+nbl = length(ax);
 
+colors = {[.2 .6 .8],[.8 .4 .3],'k','k','c'};
 fprintf('Change figure format (font size, dimensions,...)\n');
 
-%%% Change axes properties
-% font size
-set(ax,'fontsize',14);
-% tick interpreter to latex
-set(ax,'TickLabelInterpreter','latex');
-% tick labeling (automatic)
-set(ax,'xTickLabelMode','auto');
-% ylimits
-set(ax,'ylim',[-100 0]);
-% labels
-xlabel('Fréquence [Hz]');
-ylabel('Amplitude [dB]')
+% get axes dimensions (useful to resize axes object when deleting a sublot
+% axes)
+dummyfig = figure;
+plot(1,1);
+ax_pos = get(gca,'position');
+delete(dummyfig);
 
-%%% change line properties
-% Line width
-set(hls,'linewidth',2);
-% line color
-set(hls,'color','k');
-delete(hls(1))
+for k = 1 : nbl
+    % get lines on each axes
+    hls = get(ax(k),'Children');
+    
+    if isempty(hls) || k == 1
+        delete(ax(k))
+    else            
+        %%% Change axes properties
+        % font size
+        set(ax(k),'position',ax_pos);
+        set(ax(k),'fontsize',14);
+        % tick interpreter to latex
+        set(ax(k),'TickLabelInterpreter','latex');
+        set(ax(k),'Title',[]);
+        %set(ax(k),'ylim',[-60 0])
+        % tick labeling (automatic)
+        %set(ax,'xTickLabelMode','auto');
+        % ylimits
+        %set(ax,'ylim',[-100 0]);
+        % labels
+        xlabel('Fréquence [s]');
+        ylabel('DSP [dBA]')        
+
+        %%% change line properties
+        % Line width
+        set(hls,'linewidth',2);
+        %set(hls(1),'Visible','off');
+        set(hls(1),'color',colors{1});
+        set(hls(2),'linestyle','--')
+        set(hls(2),'color',colors{2});
+        % line color
+        %    set(hls,'color','k');
+
+    end
+end
+
+
 
 %%% Output formating ('eps' recommanded for LaTeX use)
 switch outFmt
