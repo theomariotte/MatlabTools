@@ -79,6 +79,14 @@ for k = 1 : nbl
 end
 
 
+<<<<<<< HEAD
+=======
+%%% change line properties
+% Line width
+set(hls,'linewidth',2);
+% line color
+% set(hls,'color','k');
+>>>>>>> LatexFigDev
 
 %%% Output formating ('eps' recommanded for LaTeX use)
 switch outFmt
@@ -97,5 +105,6 @@ end
 %%% Save the new figure i, the same directory
 print([figpath fname],fmt);
 fprintf('New figure saved as :\n %s\n',[figpath fname '.' outFmt]);
+
 
 end
