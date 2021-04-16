@@ -21,3 +21,5 @@ figurepath = [rootDir 'figures/'];
 addpath(freqpath);
 addpath(filterpath);
 addpath(figurepath);
+
+fprintf('Initialization done !')
